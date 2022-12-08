@@ -6,13 +6,14 @@ import { FC, ReactNode, useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { Head } from '@components/common'
 import { ManagedUIContext } from '@components/ui/context'
+import livecycleSDK from '@livecycle/sdk'
 
 const Noop: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
-
   useEffect(() => {
+    livecycleSDK.init()
     document.body.classList?.remove('loading')
   }, [])
 
